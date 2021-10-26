@@ -524,7 +524,7 @@ n8l::miniconda::lsst_env() {
 		if [[ "$ref" == [dsvw]* ]]; then
 			args+=("--file" "${ref}.env")
 		else
-			args+=("=${ref}")
+			args+=("rubin-env=${ref}")
 		fi
 
 		$cmd conda "${args[@]}"
