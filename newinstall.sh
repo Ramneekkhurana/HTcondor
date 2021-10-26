@@ -523,13 +523,13 @@ n8l::miniconda::lsst_env() {
 		done
 		if [[ "$ref" == [dsvw]* ]]; then
 			args+=("--file" "${ref}.env")
-		#else
-		#	args+=("rubin-env=${ref}")
+		else
+			args+=("=${ref}")
 		fi
 
 		$cmd conda "${args[@]}"
 
-		# Update rubin-env to latest build of specified version
+		# Update to latest build of specified version
 		if [[ "$ref" == [dsvw]* ]]; then
 			args=("install" "-y")
 			args+=("--no-update-deps" "--strict-channel-priority")
@@ -537,7 +537,7 @@ n8l::miniconda::lsst_env() {
 			for c in $conda_channels; do
 				args+=("-c" "$c")
 			done
-			#args+=("rubin-env==$LSST_SPLENV_REF")
+			args+=("rubin-env==$LSST_SPLENV_REF")
 			$cmd conda "${args[@]}"
 			rm -f "${ref}.env"
 		fi
